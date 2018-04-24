@@ -1,8 +1,4 @@
 FROM debian:stretch-slim
-MAINTAINER Swisscom Ltd. <security.banking@swisscom.com>
-
-ARG TAG
-LABEL TAG=${TAG}
 
 ENV MARIADB_MAJOR 10.2
 ENV MARIADB_VERSION 10.2.14+maria~stretch
@@ -25,7 +21,6 @@ RUN set -ex ;\
         -e '/wait_timeout[^_]\s*/c\wait_timeout = 750' \
         -e '/\[mysqld\]/a skip-host-cache' \
         -e '/\[mysqld\]/a skip-name-resolve' \
-        -e '/\[mysqld\]/a lower_case_table_names = 1' \
         -i /etc/mysql/my.cnf
 
 # Add local files to image
