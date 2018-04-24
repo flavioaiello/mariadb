@@ -1,6 +1,6 @@
 # MariaDB
 
-## Docker Compose example:
+## Compose sample excerpt
 (Please pass your own credentials or let them be generated automatically, don't use these ones for production!)
 ```
 ...
