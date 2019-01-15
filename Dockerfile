@@ -1,9 +1,9 @@
 FROM debian:stretch-slim
 
-ENV MARIADB_MAJOR 10.2
-ENV MARIADB_VERSION 10.2.14+maria~stretch
+ENV MARIADB_MAJOR 10.3
+ENV MARIADB_VERSION 1:10.3.12+maria~stretch
 
-RUN set -ex ;\
+RUN set -e ;\
     groupadd -r mysql ;\
     useradd -r -g mysql mysql ;\
     { \
@@ -17,10 +17,11 @@ RUN set -ex ;\
     mkdir -p /docker-entrypoint-initdb.d /var/lib/mysql /var/run/mysqld ;\
     chown -R mysql:mysql /var/lib/mysql /var/run/mysqld ;\
     chmod 777 /var/run/mysqld ;\
-    sed -re 's/^(bind-address|log|user)/#&/' \ 
+    sed -re 's/^(bind-address|log|user)/#&/' \
         -e '/wait_timeout[^_]\s*/c\wait_timeout = 750' \
         -e '/\[mysqld\]/a skip-host-cache' \
         -e '/\[mysqld\]/a skip-name-resolve' \
+        -e '/\[mysqld\]/a lower_case_table_names = 1' \
         -i /etc/mysql/my.cnf
 
 # Add local files to image
