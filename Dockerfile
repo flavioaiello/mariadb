@@ -1,7 +1,7 @@
 FROM debian:stretch-slim
 
 ENV MARIADB_MAJOR 10.3
-ENV MARIADB_VERSION 1:10.3.12+maria~stretch
+ENV MARIADB_VERSION 1:10.3.13+maria~stretch
 
 RUN set -e ;\
     groupadd -r mysql ;\
